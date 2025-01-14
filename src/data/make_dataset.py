@@ -55,19 +55,19 @@ def process_data(input_filepath_users, input_filepath_caract, input_filepath_pla
     df = merge_datasets(df_users, df_veh, df_places, df_caract)
 
     # Add new columns
-    df = add_new_columns(df, nb_victim, nb_vehicules)
+    #df = add_new_columns(df, nb_victim, nb_vehicules)
 
     # Modify target variable
-    df = modif_target_variable(df)
+   # df = modif_target_variable(df)
 
     # Replace values -1 and 0
-    df = replace_values(df)
+    #df = replace_values(df)
 
     # Drop columns
-    df = drop_columns(df)
+    #df = drop_columns(df)
 
     # Drop lines with NaN values
-    df = drop_lines_with_nan_values(df)
+    #df = drop_lines_with_nan_values(df)
 
     # Split data into training and testing sets
     X_train, X_test, y_train, y_test = split_data(df)
@@ -152,13 +152,13 @@ def merge_datasets(df_users, df_veh, df_places, df_caract):
     df = fusion2.merge(df_caract, on='Num_Acc', how="left")
     return df
 
-def add_new_columns(df, nb_victim, nb_vehicules):
+'''def add_new_columns(df, nb_victim, nb_vehicules):
     # Add new columns
     df = df.merge(nb_victim, on="Num_Acc", how="inner")
     df.rename({"count": "nb_victim"}, axis=1, inplace=True)
     df = df.merge(nb_vehicules, on="Num_Acc", how="inner")
     df.rename({"count": "nb_vehicules"}, axis=1, inplace=True)
-    return df
+    return df'''
 
 def modif_target_variable(df):
     # Modify target variable
@@ -179,11 +179,11 @@ def drop_columns(df):
     df.drop(list_to_drop, axis=1, inplace=True)
     return df
 
-def drop_lines_with_nan_values(df):
+'''def drop_lines_with_nan_values(df):
     # Drop lines with NaN values
     col_to_drop_lines = ['catv', 'vma', 'secu1', 'obsm', 'atm']
     df = df.dropna(subset=col_to_drop_lines, axis=0)
-    return df
+    return df'''
 
 def split_data(df):
     # Split data into training and testing sets
